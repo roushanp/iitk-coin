@@ -19,6 +19,11 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+type User struct { 
+	Rollno    int     `json:"rollno"` 
+	Jwtoken  string  `json:"jwt"`
+}
+
 func checkErr(err error){
 	if(err!=nil){log.Fatal(err)}
 }
@@ -97,6 +102,13 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			Value:   tokenString,
 			Expires: expirationTime,
 		})
+		w.Header().Set("Content-Type", "application/json") 
+      	user := User {
+                	Rollno: rollno, 
+                    Jwtoken: tokenString,
+				}
+      
+     	json.NewEncoder(w).Encode(user) 
 		//fmt.Fprintf(w, "Password matched %s",tokenString)
 	}
 	
