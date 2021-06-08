@@ -63,6 +63,3 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		database.Insert(rollno, name, batch, IsAdmin, hash)
 	}
 }
-
-
-
