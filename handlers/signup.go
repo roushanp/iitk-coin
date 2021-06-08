@@ -11,17 +11,6 @@ import(
 	"github.com/roushanp/iitk-coin/database"
 )
 
-var jwtKey = []byte("my_secret_key")
-
-type Claims struct {
-	Roll int `json:"rollno"`
-	jwt.StandardClaims
-}
-
-type User struct { 
-	Rollno    int     `json:"rollno"` 
-	Jwtoken  string  `json:"jwt"`
-}
 
 func checkErr(err error){
 	if(err!=nil){log.Fatal(err)}
