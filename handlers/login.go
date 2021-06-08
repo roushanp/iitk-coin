@@ -29,19 +29,19 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	checkErr(err)
 	
 	keyVal1 := make(map[string]int)
-    keyVal2 := make(map[string]string)
+	keyVal2 := make(map[string]string)
 	
-    json.Unmarshal(body, &keyVal1) // check for errors
+	json.Unmarshal(body, &keyVal1) // check for errors
 	json.Unmarshal(body, &keyVal2) // check for errors
 
 	rollno := keyVal1["rollno"]
-    password := []byte(keyVal2["password"])
+	password := []byte(keyVal2["password"])
 	password_db := []byte(database.GetPassword(rollno))
 	err = bcrypt.CompareHashAndPassword(password_db,password)
 	if err != nil {
         log.Println(err)
 		w.WriteHeader(http.StatusUnauthorized)
-    }
+	}
 	if(err==nil){
 		expirationTime := time.Now().Add(10 * time.Minute)
 		claims := &Claims{
@@ -62,12 +62,12 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			Expires: expirationTime,
 		})
 		w.Header().Set("Content-Type", "application/json") 
-      	user := User {
+		user := User {
                 	Rollno: rollno, 
                     Jwtoken: tokenString,
 				}
-      
-     	json.NewEncoder(w).Encode(user) 
+				
+		json.NewEncoder(w).Encode(user) 
 		//fmt.Fprintf(w, "Password matched %s",tokenString)
 	}
 	
