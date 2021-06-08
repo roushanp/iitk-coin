@@ -32,26 +32,31 @@ func hashAndSalt(pwd []byte) string {
 }
 
 func SignUpHandler(w http.ResponseWriter, r *http.Request) {
-	/*if r.URL.Path != "/signup" {
-        http.Error(w, "404 not found.", http.StatusNotFound)
-        return
-    }*/
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 	
 	keyVal1 := make(map[string]int)
     keyVal2 := make(map[string]string)
+	keyVal3 := make(map[string]string)
+	keyVal4 := make(map[string]int)
+	keyVal5 := make(map[string]string)
 	
     json.Unmarshal(body, &keyVal1) // check for errors
 	json.Unmarshal(body, &keyVal2) // check for errors
+	json.Unmarshal(body, &keyVal3) // check for errors
+	json.Unmarshal(body, &keyVal4) // check for errors
+	json.Unmarshal(body, &keyVal5) // check for errors
 	
 	rollno := keyVal1["rollno"]
-    password := keyVal2["password"]
+	name := keyVal2["name"]
+	batch := keyVal3["batch"]
+	IsAdmin := keyVal4["IsAdmin"]
+    password := keyVal5["password"]
 	hash := hashAndSalt([]byte(password))
 
     if(r.Method == "POST"){
-		fmt.Fprintf(w, "POST method passed in signup %d %s",rollno,hash)
-		database.Insert(rollno, hash)
+		fmt.Fprintf(w, "POST method passed in signup %d %s %s",rollno,hash,name)
+		database.Insert(rollno, name, batch, IsAdmin, hash)
 	}
 }
 
@@ -84,7 +89,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 		tokenString, err := token.SignedString(jwtKey)
 		if err != nil {
-			// If there is an error in creating the JWT return an internal server error
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
@@ -102,11 +106,9 @@ func SecretPage(w http.ResponseWriter, r *http.Request){
 	c, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
-			// If the cookie is not set, return an unauthorized status
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-		// For any other type of error, return a bad request status
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -127,7 +129,8 @@ func SecretPage(w http.ResponseWriter, r *http.Request){
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	fmt.Fprintf(w, "Welcome to IITK")
+	name,batch := database.GetUserDetails(claims.Roll)
+	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system",name, batch)
 }
 
 func main() {
