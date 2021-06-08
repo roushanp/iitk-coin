@@ -44,7 +44,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	name := keyVal2["name"]
 	batch := keyVal3["batch"]
 	IsAdmin := keyVal4["IsAdmin"]
-    password := keyVal5["password"]
+	password := keyVal5["password"]
 	hash := hashAndSalt([]byte(password))
 
     if(r.Method == "POST"){
