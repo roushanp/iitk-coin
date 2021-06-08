@@ -3,8 +3,8 @@ package database
 import (
 	"database/sql"
 	"log"
-	"fmt"
-	"strconv"
+	//"fmt"
+	//"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -51,7 +51,7 @@ func Insert(rollno int, name string, batch string, IsAdmin int , password string
 	statement.Exec()
 	addUser(rollno, name, batch, IsAdmin, password)
 	
-	rows, err := db.Query("SELECT * FROM User")
+	/*rows, err := db.Query("SELECT * FROM User")
 	checkErr(err)
     for rows.Next() {
         rows.Scan(&rollno, &name, &batch, &IsAdmin)
@@ -62,7 +62,7 @@ func Insert(rollno int, name string, batch string, IsAdmin int , password string
     for rows.Next() {
         rows.Scan(&rollno, &password)
         fmt.Println(strconv.Itoa(rollno) + ": " + password)
-    }
+    }*/
 	db.Close()
 	
 }
