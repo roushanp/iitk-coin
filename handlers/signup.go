@@ -1,12 +1,12 @@
 package handlers
 import(
-	"fmt"
+	//"fmt"
 	"log"
 	"io/ioutil"
 	"net/http"
 	"encoding/json"
 	"golang.org/x/crypto/bcrypt"
-	"github.com/dgrijalva/jwt-go"
+	//"github.com/dgrijalva/jwt-go"
 
 	"github.com/roushanp/iitk-coin/database"
 )
@@ -48,7 +48,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	hash := hashAndSalt([]byte(password))
 
     if(r.Method == "POST"){
-		fmt.Fprintf(w, "POST method passed in signup %d %s %s",rollno,hash,name)
+		//fmt.Fprintf(w, "POST method passed in signup %d %s %s",rollno,hash,name)
 		database.Insert(rollno, name, batch, IsAdmin, hash)
 	}
 }

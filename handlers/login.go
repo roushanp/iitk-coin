@@ -1,6 +1,7 @@
 package handlers
 
 import(
+	//"fmt"
 	"log"
 	"io/ioutil"
 	"net/http"
@@ -60,6 +61,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			Name:    "token",
 			Value:   tokenString,
 			Expires: expirationTime,
+			HttpOnly: true,
 		})
 		w.Header().Set("Content-Type", "application/json") 
 		user := User {
