@@ -37,4 +37,7 @@ func SecretPage(w http.ResponseWriter, r *http.Request){
 	}
 	name,batch := database.GetUserDetails(claims.Roll)
 	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system",name, batch)
+	http.HandleFunc("/award", Award)
+	http.HandleFunc("/transfer", Transfer)
+	http.HandleFunc("/balance", Balance)
 }
