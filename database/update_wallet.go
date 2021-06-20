@@ -36,7 +36,7 @@ func Transfer(rollno1 int, rollno2 int, coin int){
 	mutex.Lock()
 
 	var coin1 int;
-	db.QueryRow("SELECT coin FROM User WHERE rollno=?", rollno1).Scan(&coin1)
+	tx.QueryRow("SELECT coin FROM User WHERE rollno=?", rollno1).Scan(&coin1)
 	if((coin1-coin)<0){
 		fmt.Println("doing rollback")
 		tx.Rollback()
