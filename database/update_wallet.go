@@ -35,6 +35,14 @@ func Transfer(rollno1 int, rollno2 int, coin int){
 	checkErr(err)
 	mutex.Lock()
 
+	var coin1 int;
+	db.QueryRow("SELECT coin FROM User WHERE rollno=?", rollno1).Scan(&coin1)
+	if((coin1-coin)<0){
+		fmt.Println("doing rollback")
+		tx.Rollback()
+		mutex.Unlock()
+	}
+
 	_, err = tx.Exec("UPDATE User SET coin = coin - ? WHERE rollno=? AND coin - ? >= 0", coin, rollno1, coin)
 
 	if err != nil {
