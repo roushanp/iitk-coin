@@ -20,9 +20,9 @@ func AddCoin(rollno int, coin int){
 
 func Transfer(rollno1 int, rollno2 int, coin int){
 	
+	mutex.Lock()
 	tx, err := DB.Begin()
 	checkErr(err)
-	mutex.Lock()
 
 	var coin1 int;
 	tx.QueryRow("SELECT coin FROM User WHERE rollno=?", rollno1).Scan(&coin1)
