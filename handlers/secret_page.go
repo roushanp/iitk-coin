@@ -1,14 +1,14 @@
 package handlers
 
-import(
+import (
 	"fmt"
-	"net/http"
 	"github.com/dgrijalva/jwt-go"
+	"net/http"
 
 	"github.com/roushanp/iitk-coin/database"
 )
 
-func SecretPage(w http.ResponseWriter, r *http.Request){
+func SecretPage(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
@@ -35,8 +35,8 @@ func SecretPage(w http.ResponseWriter, r *http.Request){
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
-	name,batch := database.GetUserDetails(claims.Roll)
-	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system",name, batch)
+	name, batch := database.GetUserDetails(claims.Roll)
+	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system", name, batch)
 	http.HandleFunc("/award", Award)
 	http.HandleFunc("/transfer", Transfer)
 	http.HandleFunc("/balance", Balance)
