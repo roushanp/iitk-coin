@@ -34,3 +34,10 @@ The aim of this project‌ is ‌to‌ ‌build‌ ‌a‌ ‌**pseudo-coin‌ �
 3. There is a `\login` endpoint which takes user's rollno and password, and match it with the password stored in database. If the password matches a jwt is produced having a secret key and expiration time, and get stored in cookies.
 4. If the jwt present in the cookie is valid, then the user can access `\secret_page`, which further allows user to access `\award`, `\transfer`, and `\balance` endpoints.
 5. The `\award` is used to add coins in the database of the user, `\transfer` is used to tansfer coins from one user to another, and `\balance` is used to get the details of how much coin the user has.
+6. There are three levels of users:
+    * Super Admin (GenSec's account), where IsAdmin variable stores '2'.
+    * Admin (Club's account), where IsAdmin variable stores '1',
+    * Rest, where IsAdmin variable stores '0'.
+7. Only Super Admin is allowed to award coins to any user. Personal account of GenSec, Associate Heads, and Coordinators of different clubs and socities will be freezed.
+8. There is 33% tax on inter batch transfer, and 2% tax on intra batch transfer. No tax will be imposed on any transfer from admin, and super admin.
+9. Users in "Rest" category, must participate in atleast '1' event to get coins.
