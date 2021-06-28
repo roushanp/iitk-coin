@@ -27,7 +27,7 @@ func Award(w http.ResponseWriter, r *http.Request) {
 
     if(r.Method == "POST"){
 		//fmt.Fprintf(w, "POST method passed in signup %d %s %s",rollno,hash,name)
-		database.AddCoin(rollno, coin)
+		database.AddCoin(Claim_roll,rollno, coin)
 	}
 }
 
@@ -47,6 +47,11 @@ func Transfer(w http.ResponseWriter, r *http.Request) {
 	rollno2 := keyVal2["rollno2"]
 	coin := keyVal3["coin"]
 
+	if(Claim_roll!=rollno1){
+		fmt.Fprintf(w, "%d is not allowed to transfer coin from %d",Claim_roll,rollno1)
+		return
+	}
+
     if(r.Method == "POST"){
 		//fmt.Fprintf(w, "POST method passed in signup %d %s %s",rollno,hash,name)
 		database.Transfer(rollno1, rollno2, coin)
@@ -60,6 +65,12 @@ func Balance(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(body, &keyVal) // check for errors
 	rollno := keyVal["rollno"]
 	coin := 0
+
+	if(Claim_roll!=rollno){
+		fmt.Fprintf(w, "%d is not allowed to get balance details of %d",Claim_roll,rollno)
+		return
+	}
+
 	if(r.Method == "GET"){
 		coin = database.Balance(rollno)
 		fmt.Fprintf(w, "Available Coin of %d is %d",rollno,coin)

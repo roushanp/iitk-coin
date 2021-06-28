@@ -7,6 +7,7 @@ import (
 
 	"github.com/roushanp/iitk-coin/database"
 )
+var Claim_roll int = 0
 
 func SecretPage(w http.ResponseWriter, r *http.Request) {
 	c, err := r.Cookie("token")
@@ -35,8 +36,9 @@ func SecretPage(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
+	Claim_roll=claims.Roll
 	name, batch := database.GetUserDetails(claims.Roll)
-	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system", name, batch)
+	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system. Now you can access award, transfer, and balance endpoints", name, batch)
 	http.HandleFunc("/award", Award)
 	http.HandleFunc("/transfer", Transfer)
 	http.HandleFunc("/balance", Balance)
