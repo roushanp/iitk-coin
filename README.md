@@ -40,4 +40,4 @@ The aim of this project‌ is ‌to‌ ‌build‌ ‌a‌ ‌**pseudo-coin‌ �
     * Rest, where IsAdmin variable stores '0'.
 7. Only Super Admin is allowed to award coins to any user. Personal account of GenSec, Associate Heads, and Coordinators of different clubs and socities will be freezed.
 8. There is 33% tax on inter batch transfer, and 2% tax on intra batch transfer. No tax will be imposed on any transfer from admin, and super admin.
-9. Users in "Rest" category, must participate in atleast '1' event to get coins.
+9. Users in "Rest" category, must participate in atleast '1' event to get/transfer coins.

@@ -52,7 +52,7 @@ func ConnectDB() {
 	    }*/
 }
 
-func AddUser(rollno int, name string, batch string, IsAdmin int,N_events int, password string) {
+func AddUser(rollno int, name string, batch string, IsAdmin int, N_events int, password string) {
 	coin := 0
 	statement, err := DB.Prepare("INSERT INTO User (rollno, name, batch, IsAdmin, N_events, coin) VALUES (?, ?, ?, ?, ?, ?)")
 	checkErr(err)

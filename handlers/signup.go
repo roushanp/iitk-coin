@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"log"
@@ -36,7 +36,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	keyVal4 := make(map[string]int)
 	keyVal5 := make(map[string]int)
 	keyVal6 := make(map[string]string)
-	
+
 	json.Unmarshal(body, &keyVal1) // check for errors
 	json.Unmarshal(body, &keyVal2) // check for errors
 	json.Unmarshal(body, &keyVal3) // check for errors
@@ -53,7 +53,7 @@ func SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	hash := hashAndSalt([]byte(password))
 
 	if r.Method == "POST" {
-		fmt.Fprintf(w, "POST method passed in signup %d %s %s IsAdmin %d events %d",rollno,hash,name,IsAdmin,N_events)
+		fmt.Fprintf(w, "POST method passed in signup %d %s %s IsAdmin %d events %d", rollno, hash, name, IsAdmin, N_events)
 		database.AddUser(rollno, name, batch, IsAdmin, N_events, hash)
 	}
 }
