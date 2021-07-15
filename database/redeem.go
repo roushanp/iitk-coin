@@ -106,6 +106,14 @@ func RedeemProc(claim_roll int, rollno int, item string, accept int) {
 		_, err = tx.Exec("INSERT INTO History(time, rollno, details) VALUES (?,?,?)", dt, rollno, detail)
 		checkErr(err)
 	} else {
+		_, err = tx.Exec("UPDATE RedeemItem SET itemLeft = itemLeft + 1 WHERE itemName=?", item)
+		checkErr(err)
+		if err != nil {
+			fmt.Println("doing rollback")
+			tx.Rollback()
+			mutex.Unlock()
+			return
+		}
 		var detail string = "Redeem of " + item + " having cost " + strconv.Itoa(cost) + "failed"
 		var datetime = time.Now()
 		dt := datetime.Format(time.RFC3339)
