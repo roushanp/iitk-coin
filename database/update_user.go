@@ -42,9 +42,6 @@ func ConnectDB() {
 	statement, err = DB.Prepare("CREATE TABLE IF NOT EXISTS RedeemItem (itemName TEXT PRIMARY KEY,itemLeft INTEGER, itemCost INTEGER)")
 	checkErr(err)
 	statement.Exec()
-	statement, err = DB.Prepare("DROP TABLE IF EXISTS ReedemItem")
-	checkErr(err)
-	statement.Exec()
 	/*coin := 0
 
 		rows, err := DB.Query("SELECT * FROM User")
