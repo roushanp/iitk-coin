@@ -36,6 +36,15 @@ func ConnectDB() {
 	statement, err = DB.Prepare("CREATE TABLE IF NOT EXISTS History (time DATETIME DEFAULT CURRENT_TIMESTAMP, rollno INTEGER, details TEXT)")
 	checkErr(err)
 	statement.Exec()
+	statement, err = DB.Prepare("CREATE TABLE IF NOT EXISTS RedeemPending (time DATETIME DEFAULT CURRENT_TIMESTAMP, rollno INTEGER, item_name TEXT, coin INTEGER)")
+	checkErr(err)
+	statement.Exec()
+	statement, err = DB.Prepare("CREATE TABLE IF NOT EXISTS RedeemItem (itemName TEXT PRIMARY KEY,itemLeft INTEGER, itemCost INTEGER)")
+	checkErr(err)
+	statement.Exec()
+	statement, err = DB.Prepare("DROP TABLE IF EXISTS ReedemItem")
+	checkErr(err)
+	statement.Exec()
 	/*coin := 0
 
 		rows, err := DB.Query("SELECT * FROM User")

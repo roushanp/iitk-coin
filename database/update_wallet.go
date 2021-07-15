@@ -8,7 +8,7 @@ import (
 	//"sync"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
+	//_ "github.com/mattn/go-sqlite3"
 )
 
 func AddCoin(claim_roll int, rollno int, coin int) {
