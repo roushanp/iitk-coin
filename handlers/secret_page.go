@@ -11,11 +11,12 @@ import (
 var Claim_roll int = 0
 var tkn *jwt.Token
 
-func CheckToken(){
+func CheckToken()bool{
 	if !tkn.Valid {
-		fmt.Println("Token Expired")
-		return
+		fmt.Println("Token Expired, Please login again")
+		return true
 	}
+	return false
 }
 
 func SecretPage(w http.ResponseWriter, r *http.Request) {
