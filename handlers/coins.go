@@ -13,7 +13,7 @@ import (
 )
 
 func Award(w http.ResponseWriter, r *http.Request) {
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 
@@ -33,7 +33,7 @@ func Award(w http.ResponseWriter, r *http.Request) {
 }
 
 func Transfer(w http.ResponseWriter, r *http.Request) {
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 
@@ -61,7 +61,7 @@ func Transfer(w http.ResponseWriter, r *http.Request) {
 }
 
 func Balance(w http.ResponseWriter, r *http.Request) {
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 	keyVal := make(map[string]int)

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	//"fmt"
+	"fmt"
 	"encoding/json"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
@@ -73,4 +73,13 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		//fmt.Fprintf(w, "Password matched %s",tokenString)
 	}
 
+}
+
+func LogoutHandler(w http.ResponseWriter, r *http.Request){
+	http.SetCookie(w, &http.Cookie{
+		Name:     "token",
+		MaxAge: -1,
+	})
+	w.Write([]byte("Old cookie deleted. Logged out!\n"))
+	fmt.Fprintf(w, "Logout successful")
 }

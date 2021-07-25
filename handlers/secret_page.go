@@ -11,11 +11,27 @@ import (
 var Claim_roll int = 0
 var tkn *jwt.Token
 
-func CheckToken()bool{
+func CheckToken(w http.ResponseWriter, r *http.Request)bool{
 	if !tkn.Valid {
 		fmt.Println("Token Expired, Please login again")
 		return true
 	}
+	/*if (r.Cookies() == nil){
+		fmt.Println("Logged out, Please login again")
+		return true
+	}*/
+
+	_, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			fmt.Println("Logged out, Please login again")
+			return true
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return true
+	}
+
 	return false
 }
 
@@ -48,11 +64,6 @@ func SecretPage(w http.ResponseWriter, r *http.Request) {
 	}
 	Claim_roll = claims.Roll
 	name, batch := database.GetUserDetails(claims.Roll)
-	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system. Now you can access award, transfer, and balance endpoints", name, batch)
-	http.HandleFunc("/award", Award)
-	http.HandleFunc("/transfer", Transfer)
-	http.HandleFunc("/balance", Balance)
-	http.HandleFunc("/redeem",Redeem)
-	http.HandleFunc("/redeemProc",RedeemProc)
-	http.HandleFunc("/additem",AddItem)
+	fmt.Fprintf(w, "Welcome to IITK Coin %s. Your batch is %s and you have succesfully logged in our system. Now you can access award, transfer, balance, and other endpoints", name, batch)
+	
 }

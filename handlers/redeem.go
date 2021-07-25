@@ -13,7 +13,7 @@ import(
 )
 
 func AddItem(w http.ResponseWriter, r *http.Request){
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 
@@ -36,7 +36,7 @@ func AddItem(w http.ResponseWriter, r *http.Request){
 }
 
 func Redeem(w http.ResponseWriter, r *http.Request) {
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 
@@ -55,7 +55,7 @@ func Redeem(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func RedeemProc(w http.ResponseWriter, r *http.Request){
-	if(CheckToken()){return}
+	if(CheckToken(w,r)){return}
 	body, err := ioutil.ReadAll(r.Body)
 	checkErr(err)
 
