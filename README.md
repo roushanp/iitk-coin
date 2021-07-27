@@ -26,6 +26,9 @@ The aim of this project‌ is ‌to‌ ‌build‌ ‌a‌ ‌**pseudo-coin‌ �
     * Reading and writing operations are very fast for SQLite database. It is almost 35% faster than File system.
     * SQLite is very easy to learn. We don't need to install and configure it. Just download SQLite libraries in the computer and it is ready for creating the database.
     * It can be used with all programming languages without any compatibility issue.
+4. **Shipping:** Docker
+    * Docker is a set of platform as a service products that use OS-level virtualization to deliver software in packages called containers. Containers are isolated from one another and bundle their own software, libraries and configuration files. They can communicate with each other through well-defined channels.
+
 
 ## Status
 
@@ -44,3 +47,4 @@ The aim of this project‌ is ‌to‌ ‌build‌ ‌a‌ ‌**pseudo-coin‌ �
 10. GenSec and AHs can post the items that can be redeemed, which will get stored in a table RedeemItem.
 11. Students can post redeem request, which will get stored in a table RedeemPending. Once a request get processed, the corresponding row will be deleted. For each request posted, item left will decrease by 1.
 12. Only GenSec and AHs can accept or reject requests. if the request is accepted, coins will get deducted from the student wallet, and if rejected corresponding value of item left will increase by 1.
+13. Built a docker file for this application, created a dockerhub repo, and connected that with this github repo.
