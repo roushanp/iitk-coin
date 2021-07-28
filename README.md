@@ -47,4 +47,4 @@ The aim of this project‌ is ‌to‌ ‌build‌ ‌a‌ ‌**pseudo-coin‌ �
 10. GenSec and AHs can post the items that can be redeemed, which will get stored in a table RedeemItem.
 11. Students can post redeem request, which will get stored in a table RedeemPending. Once a request get processed, the corresponding row will be deleted. For each request posted, item left will decrease by 1.
 12. Only GenSec and AHs can accept or reject requests. if the request is accepted, coins will get deducted from the student wallet, and if rejected corresponding value of item left will increase by 1.
-13. Built a docker file for this application, created a dockerhub repo `\https://hub.docker.com/r/roushanp/iitk-coin`, and connected that with this github repo.
+13. Built a docker file for this application, created a [dockerhub repo](https://hub.docker.com/r/roushanp/iitk-coin), and connected that with this github repo.
