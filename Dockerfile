@@ -2,8 +2,6 @@ FROM golang:latest
 
 LABEL maintainer="Roushan <roushanprakash123@gmail.com>"
 
-LABEL version="1.0"
-
 WORKDIR /app
 
 COPY go.mod .
